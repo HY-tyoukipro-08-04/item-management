@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +27,13 @@ Route::prefix('items')->group(function () {
     Route::get('/add', [App\Http\Controllers\ItemController::class, 'add']);
     Route::post('/add', [App\Http\Controllers\ItemController::class, 'add']);
 });
+
+// 削除（追加機能）
+Route::delete('/{id}', [App\Http\Controllers\ItemController::class, 'delete'])->name('items.delete');
+
+// 検索（追加機能）
+Route::get('/', [App\Http\Controllers\ItemController::class, 'serch'])->name('items.index');
+
+// 編集 (編集機能)
+Route::get('/items/edit/{id}', [App\Http\Controllers\ItemController::class, 'edit'])->name('items.edit');
+Route::post('/items/edit/{id}', [App\Http\Controllers\ItemController::class, 'update'])->name('items.update');
