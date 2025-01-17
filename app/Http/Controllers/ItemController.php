@@ -39,7 +39,12 @@ class ItemController extends Controller
             // バリデーション
             $this->validate($request, [
                 'name' => 'required|max:100',
-            ]);
+            ],
+            [
+                'name.required' => '名前は必須です。',
+                'name.max' => '名前の文字数は、100文字以下である必要があります。'
+            ]
+        );
 
             // 商品登録
             Item::create([
@@ -111,7 +116,16 @@ public function update(Request $request, $id)
         'name' => 'required|max:100',
         'type' => 'nullable|max:100',
         'detail' => 'nullable|max:500',
-    ]);
+    ],
+    
+        [
+            'name.required' => '名前は必須です。',
+            'name.max' => '名前の文字数は、100文字以下である必要があります。',
+            'type.max' => '種別の文字数は、100文字以下である必要があります。',
+            'detail.max' => '詳細の文字数は、500文字以下である必要があります。'
+        ]
+    
+);
 
     // データ更新
     $item->update([
